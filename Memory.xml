@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="us-ascii" ?>
+<Platform name="Win32" version="5">
+
+  <!--*************************************************************************
+	Static Global Heap Settings
+
+	THIS FILE IN INCLUDED VEBATIM IN THE EXECUTABLE
+
+	These are the settings for the Global heaps created at startup; they
+	 indicate to the memory manager how RAM should be initially organized.
+
+	Only the static Global heaps that get used by the platform can be specified
+	 here.  All other entries will be ignored.  To create additional sub-heaps
+	 at run-time, see SubHeaps.xml.
+	*************************************************************************-->
+
+  <Shared>
+    <Options autoSmall="256" />
+
+    <Shared>
+      <Options
+				numBlocks="0xA0000"
+			/>
+
+      <!-- Use the logical heap definition if paging is enabled (default). -->
+      <CreateStatic name="System Logical" size=".75G"/>
+
+      <!-- Use this heap definition if paging is disabled. -->
+      <CreateStatic name="System" size=".5G"/>
+
+    </Shared>
+
+    <Shared size="200M">
+      <Options
+				numBlocks="0x20000"
+			/>
+
+      <CreateStatic name="Debug Logical" />
+      <CreateStatic name="Debug" />
+
+    </Shared>
+
+  </Shared>
+
+
+  <Shared parent="System">
+
+    <!--======================= Thread-Local Storage Heap ======================
+
+		Because thread shelves are created via the DLL_THREAD_ATTACH message,
+		 thread-local objects can't be created via 'new' (because 'new'
+		 indirectly makes a system call when entering a critical section.)
+
+		This heap is used exclusively by the ThreadStorage namespace for
+		 allocating TLS objects.-->
+
+    <CreateLocal name="Thread Storage" size="48k">
+      <Options
+				numBlocks="272"
+				descGrowBy="32"
+				alignment="4" />
+    </CreateLocal>
+
+
+    <!--============================== String Heap =============================
+
+		The String heap needs to be created before SubHeaps.xml is parsed.-->
+
+    <CreateGlobal name="String" size="15M" >
+      <Options smallSect="4 8 16 32 48 64 80 96 128 160 192 256" />
+    </CreateGlobal>
+
+  </Shared>
+
+</Platform>
