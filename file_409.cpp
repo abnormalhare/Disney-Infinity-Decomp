@@ -14,7 +14,7 @@ unkStruct* FUN_4098E0(unkStruct* arg1, const char* text, int length, const char*
 	arg1->unk220 = 0xFFFF0000;
 	FUN_406D10(arg1->unk284);
 	arg1->unk350.func2 = FUN_409510;
-	arg1->unk350.unk8 = (unkClass*)arg1;
+	arg1->unk350.unk8 = (unkClass*)arg1; //TODO FIXME
 	arg1->unk350.func = FUN_182C6B0;
 	arg1->unk35C.func = FUN_182C6B0;
 	arg1->unk35C.func2 = FUN_405FF0;

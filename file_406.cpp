@@ -1,7 +1,7 @@
 #include "file_406.h"
 
 unkClass::FUN_406170(int* arg2) {
-	
+	FUN_404EC0();
 }
 
 int FUN_406B60(int* Destination, int arg0, int arg1, int* arg2, int* arg3, int* arg4) {
